@@ -13,6 +13,7 @@ import java.util.Scanner;
 public class Program {
 
     private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private static final InputHandler handler = new InputHandler();
 
     public static void main(String[] args) throws Exception {
 
@@ -45,10 +46,10 @@ public class Program {
 
     private static void startChess960Game() {
 
+
     }
 
     public static void startChessGame() throws IOException {
-        InputHandler handler = new InputHandler();
 
         ChessGame game = new ChessGame();
 
@@ -59,7 +60,7 @@ public class Program {
             System.out.println("Enter move (ex. A2-A3): ");
             String input = reader.readLine();
 
-            if (input.equals("EXIT")){
+            if (input.equals("EXIT")) {
                 break;
             }
 

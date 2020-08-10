@@ -20,14 +20,14 @@ public class ChessBoard {
     private void initializeBoard() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
-                if (j % 2 + i == 0) board[i][j] = new Tile(Tile.TileColor.Black);
-                else board[i][j] = new Tile(Tile.TileColor.White);
+                if (j % 2 + i == 0) board[i][j] = new Tile(TileColor.BLACK);
+                else board[i][j] = new Tile(TileColor.WHITE);
             }
         }
     }
 
     //Will break on boards with no Kings of 'color'. Should never happen.
-    public Tuple getKingLocation(ChessPiece.PieceColor color) {
+    public Tuple getKingLocation(PieceColor color) {
         Tuple location = new Tuple(-1, -1);
         for (int x = 0; x <= 7; x++) {
             for (int y = 0; y <= 7; y++) {
@@ -42,7 +42,7 @@ public class ChessBoard {
         return location;
     }
 
-    public Tuple[] getAllPiecesLocationForColor(ChessPiece.PieceColor color) {
+    public Tuple[] getAllPiecesLocationForColor(PieceColor color) {
         ArrayList<Tuple> locations = new ArrayList<>();
         for (int x = 0; x <= 7; x++) {
             for (int y = 0; y <= 7; y++) {
@@ -63,34 +63,34 @@ public class ChessBoard {
     private void fillBoard() {
         //pawns
         for (int i = 0; i < 8; i++) {
-            board[1][i].setPiece(new Pawn(ChessPiece.PieceColor.Black));
-            board[6][i].setPiece(new Pawn(ChessPiece.PieceColor.White));
+            board[1][i].setPiece(new Pawn(PieceColor.BLACK));
+            board[6][i].setPiece(new Pawn(PieceColor.WHITE));
         }
 
         //rooks
-        board[0][0].setPiece(new Rook(ChessPiece.PieceColor.Black));
-        board[0][7].setPiece(new Rook(ChessPiece.PieceColor.Black));
-        board[7][0].setPiece(new Rook(ChessPiece.PieceColor.White));
-        board[7][7].setPiece(new Rook(ChessPiece.PieceColor.White));
+        board[0][0].setPiece(new Rook(PieceColor.BLACK));
+        board[0][7].setPiece(new Rook(PieceColor.BLACK));
+        board[7][0].setPiece(new Rook(PieceColor.WHITE));
+        board[7][7].setPiece(new Rook(PieceColor.WHITE));
 
         //knight
-        board[0][1].setPiece(new Knight(ChessPiece.PieceColor.Black));
-        board[0][6].setPiece(new Knight(ChessPiece.PieceColor.Black));
-        board[7][1].setPiece(new Knight(ChessPiece.PieceColor.White));
-        board[7][6].setPiece(new Knight(ChessPiece.PieceColor.White));
+        board[0][1].setPiece(new Knight(PieceColor.BLACK));
+        board[0][6].setPiece(new Knight(PieceColor.BLACK));
+        board[7][1].setPiece(new Knight(PieceColor.WHITE));
+        board[7][6].setPiece(new Knight(PieceColor.WHITE));
 
         //bishop
-        board[0][2].setPiece(new Bishop(ChessPiece.PieceColor.Black));
-        board[0][5].setPiece(new Bishop(ChessPiece.PieceColor.Black));
-        board[7][2].setPiece(new Bishop(ChessPiece.PieceColor.White));
-        board[7][5].setPiece(new Bishop(ChessPiece.PieceColor.White));
+        board[0][2].setPiece(new Bishop(PieceColor.BLACK));
+        board[0][5].setPiece(new Bishop(PieceColor.BLACK));
+        board[7][2].setPiece(new Bishop(PieceColor.WHITE));
+        board[7][5].setPiece(new Bishop(PieceColor.WHITE));
 
         //queens
-        board[0][3].setPiece(new Queen(ChessPiece.PieceColor.Black));
-        board[7][3].setPiece(new Queen(ChessPiece.PieceColor.White));
+        board[0][3].setPiece(new Queen(PieceColor.BLACK));
+        board[7][3].setPiece(new Queen(PieceColor.WHITE));
 
         //kings
-        board[0][4].setPiece(new King(ChessPiece.PieceColor.Black));
-        board[7][4].setPiece(new King(ChessPiece.PieceColor.White));
+        board[0][4].setPiece(new King(PieceColor.BLACK));
+        board[7][4].setPiece(new King(PieceColor.WHITE));
     }
 }

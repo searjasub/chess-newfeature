@@ -5,6 +5,19 @@ import Chess.Pieces.*;
 import java.util.*;
 
 public class ChessBoard {
+
+    //BLACK LINE
+    private List<ChessPiece> blackPieces = Arrays.asList(new Rook(PieceColor.BLACK), new Bishop(PieceColor.BLACK),
+            new Knight(PieceColor.BLACK), new Queen(PieceColor.BLACK),
+            new King(PieceColor.BLACK), new Knight(PieceColor.BLACK),
+            new Bishop(PieceColor.BLACK), new Rook(PieceColor.BLACK));
+
+    //WHITE LINE
+    private List<ChessPiece> whitePieces = Arrays.asList(new Rook(PieceColor.WHITE), new Bishop(PieceColor.WHITE),
+            new Knight(PieceColor.WHITE), new Queen(PieceColor.WHITE),
+            new King(PieceColor.WHITE), new Knight(PieceColor.WHITE),
+            new Bishop(PieceColor.WHITE), new Rook(PieceColor.WHITE));
+
     private final Tile[][] board;
 
     public ChessBoard(String gameVariant) {
@@ -15,6 +28,14 @@ public class ChessBoard {
 
     public Tile[][] getBoardArray() {
         return board;
+    }
+
+    public List<ChessPiece> getBlackPieces() {
+        return blackPieces;
+    }
+
+    public List<ChessPiece> getWhitePieces() {
+        return whitePieces;
     }
 
     private void initializeBoard() {
@@ -81,32 +102,18 @@ public class ChessBoard {
      */
     private void fillBoard960Way() {
 
-        //BLACK LINE
-        List<ChessPiece> blackPieces = Arrays.asList(new Rook(PieceColor.BLACK), new Bishop(PieceColor.BLACK),
-                new Knight(PieceColor.BLACK), new Queen(PieceColor.BLACK),
-                new King(PieceColor.BLACK), new Knight(PieceColor.BLACK),
-                new Bishop(PieceColor.BLACK), new Rook(PieceColor.BLACK));
+        do {
+            Collections.shuffle(getBlackPieces());
+        } while (checkPositions(getBlackPieces().toString().replaceAll("[^\\p{Upper}]", "")));
 
-        //WHITE LINE
-        List<ChessPiece> whitePieces = Arrays.asList(new Rook(PieceColor.WHITE), new Bishop(PieceColor.WHITE),
-                new Knight(PieceColor.WHITE), new Queen(PieceColor.WHITE),
-                new King(PieceColor.WHITE), new Knight(PieceColor.WHITE),
-                new Bishop(PieceColor.WHITE), new Rook(PieceColor.WHITE));
+        System.out.println(getBlackPieces());
 
         do {
-            Collections.shuffle(blackPieces);
-        } while (checkPositions(blackPieces.toString().replaceAll("[^\\p{Upper}]", "")));
+            Collections.shuffle(getWhitePieces());
+        } while (checkPositions(getWhitePieces().toString().replaceAll("[^\\p{Upper}]", "")));
 
-        System.out.println(blackPieces);
+        System.out.println(getWhitePieces().toString());
 
-        do {
-            Collections.shuffle(whitePieces);
-        } while (checkPositions(whitePieces.toString().replaceAll("[^\\p{Upper}]", "")));
-
-        System.out.println(whitePieces.toString());
-        for (int i = 0; i < 8; i++) {
-            System.out.println(whitePieces.get(i).toString());
-        }
 
         for (int i = 0; i < 8; i++) {
             board[0][i].setPiece(blackPieces.get(i));

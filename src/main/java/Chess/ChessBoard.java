@@ -120,7 +120,7 @@ public class ChessBoard {
         }
 
         for (int i = 0; i < 8; i++) {
-            board[7][i].setPiece(whitePieces.get(i));
+            board[7][i].setPiece(blackPieces.get(i));
         }
     }
 

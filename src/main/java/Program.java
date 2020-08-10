@@ -3,21 +3,62 @@ import Chess.Tuple;
 import Console.InputHandler;
 import Console.BoardDisplay;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 
 public class Program {
 
-    public static void main(String args[]) throws Exception {
-        InputHandler handler = new InputHandler();
-        Scanner scanner = new Scanner(System.in);
+    private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private static final InputHandler handler = new InputHandler();
 
-        ChessGame game = new ChessGame();
+    public static void main(String[] args) throws Exception {
+
+        boolean isValid = false;
+        System.out.println("\nWelcome to PRO250");
+
+        while (!isValid) {
+            System.out.println("Let's get started by selecting which game you want to play.");
+            System.out.println("[0] - Regular Chess Game");
+            System.out.println("[1] - CHESS 960");
+
+            String option = reader.readLine();
+            switch (option) {
+                case "0":
+                    startChessGame("Normal");
+                    isValid = true;
+                    break;
+                case "1":
+                    startChessGame("960");
+                    isValid = true;
+                    break;
+                default:
+                    System.out.println("That's not a valid option");
+                    isValid = false;
+                    break;
+            }
+        }
+        main(args);
+    }
+
+
+    public static void startChessGame(String gameVariant) throws IOException {
+
+        ChessGame game = new ChessGame(gameVariant);
+
         BoardDisplay.clearConsole();
         BoardDisplay.printBoard(game.getBoard());
+
         while (!game.isFinished()) {
-            System.out.println("Enter move (eg. A2-A3): ");
-            String input = scanner.nextLine();
+            System.out.println("Enter move (ex. A2-A3): ");
+            String input = reader.readLine();
+
+            if (input.equals("EXIT")) {
+                break;
+            }
 
             if (!handler.isValid(input)) {
                 System.out.println("Invalid input!");
@@ -35,7 +76,7 @@ public class Program {
                 }
             }
         }
-        scanner.close();
+
         System.out.println("Game has finished. Thanks for playing.");
     }
 }

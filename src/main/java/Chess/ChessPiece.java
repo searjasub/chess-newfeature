@@ -8,7 +8,7 @@ public abstract class ChessPiece {
     private final char charValue;
     private final boolean repeatableMoves;
 
-    protected ChessPiece(PieceType type, PieceColor color, Move[] moves, boolean repeatableMoves){
+    protected ChessPiece(PieceType type, PieceColor color, Move[] moves, boolean repeatableMoves) {
         this.type = type;
         this.color = color;
         this.moves = moves;
@@ -17,27 +17,32 @@ public abstract class ChessPiece {
         charValue = type.name().trim().charAt(0);
     }
 
-    public enum PieceType {
-        Pawn, Rook, Knight, Bishop, Queen, King
+    public Move[] getMoves() {
+        return moves;
     }
 
-    public enum PieceColor {
-        White, Black
+    public String getName() {
+        return name;
     }
-    public Move[] getMoves(){ return moves; }
 
-    public String getName(){ return name; }
+    public PieceColor getColor() {
+        return color;
+    }
 
-    public PieceColor getColor(){ return color; }
+    public char getCharValue() {
+        return charValue;
+    }
 
-    public char getCharValue(){ return charValue; }
+    public boolean hasRepeatableMoves() {
+        return repeatableMoves;
+    }
 
-    public boolean hasRepeatableMoves(){ return repeatableMoves; }
-
-    public PieceType getPieceType() {return type; }
+    public PieceType getPieceType() {
+        return type;
+    }
 
     public static PieceColor opponent(PieceColor color) {
-        return (color == PieceColor.Black) ? PieceColor.White : PieceColor.Black;
+        return (color == PieceColor.BLACK) ? PieceColor.WHITE : PieceColor.BLACK;
     }
 
 }

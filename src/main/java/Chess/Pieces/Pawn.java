@@ -20,4 +20,9 @@ public class Pawn extends ChessPiece {
                     new Move(1, -1, false, true), new Move(-1, -1, false, true)};
         }
     }
+
+    @Override
+    public String toString() {
+        return "P";
+    }
 }

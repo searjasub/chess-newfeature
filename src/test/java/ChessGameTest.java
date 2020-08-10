@@ -6,14 +6,14 @@ import static org.junit.Assert.*;
 public class ChessGameTest {
     @Test
     public void testNewGameIsNotFinished() {
-        ChessGame game = new ChessGame();
-        assertTrue("Game shouldn't start finished", !game.isFinished());
+        ChessGame game = new ChessGame("Normal");
+        assertFalse("Game shouldn't start finished", game.isFinished());
     }
 
     @Test
     public void testFoolsMateEndsGame() {
         String[] foolsMate = new String[]{"F2-F3", "E7-E6", "G2-G4", "D8-H4"};
-        ChessGame game = new ChessGame();
+        ChessGame game = new ChessGame("Normal");
         InputHandler handler = new InputHandler();
         for (String move : foolsMate){
             Tuple from = handler.getFrom(move);
@@ -30,7 +30,7 @@ public class ChessGameTest {
     public void testFirstMovePawn() {
         InputHandler handler = new InputHandler();
         Tuple location = handler.parse("A2");
-        ChessGame game = new ChessGame();
+        ChessGame game = new ChessGame("Normal");
         assert(game.isFirstMoveForPawn(location, game.getBoard()));
     }
 
@@ -40,7 +40,7 @@ public class ChessGameTest {
         String move = "A2-A3";
         Tuple from = handler.getFrom(move);
         Tuple to = handler.getTo(move);
-        ChessGame game = new ChessGame();
+        ChessGame game = new ChessGame("Normal");
         game.playMove(from, to);
         assert(!game.isFirstMoveForPawn(to, game.getBoard()));
     }

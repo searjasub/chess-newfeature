@@ -3,7 +3,7 @@ package Chess;
 public enum PieceType {
     PAWN,
     ROOK,
-    KNIGHT,
+    NIGHT,
     BISHOP,
     QUEEN,
     KING

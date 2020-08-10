@@ -16,4 +16,9 @@ public class Rook extends ChessPiece {
         return new Move[]{new Move(1, 0, false, false), new Move(0, 1, false, false),
                 new Move(-1, 0, false, false), new Move(0, -1, false, false)};
     }
+
+    @Override
+    public String toString() {
+        return "R";
+    }
 }

@@ -28,11 +28,11 @@ public class Program {
             String option = reader.readLine();
             switch (option) {
                 case "0":
-                    startChessGame();
+                    startChessGame("Normal");
                     isValid = true;
                     break;
                 case "1":
-                    startChess960Game();
+                    startChessGame("960");
                     isValid = true;
                     break;
                 default:
@@ -44,14 +44,10 @@ public class Program {
         main(args);
     }
 
-    private static void startChess960Game() {
 
+    public static void startChessGame(String gameVariant) throws IOException {
 
-    }
-
-    public static void startChessGame() throws IOException {
-
-        ChessGame game = new ChessGame();
+        ChessGame game = new ChessGame(gameVariant);
 
         BoardDisplay.clearConsole();
         BoardDisplay.printBoard(game.getBoard());

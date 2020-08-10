@@ -17,4 +17,9 @@ public class King extends ChessPiece {
                 new Move(1, 1, false, false), new Move(1, -1, false, false),
                 new Move(-1, 1, false, false), new Move(-1, -1, false, false)};
     }
+
+    @Override
+    public String toString() {
+        return "K";
+    }
 }

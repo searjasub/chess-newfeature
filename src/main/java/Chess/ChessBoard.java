@@ -2,15 +2,15 @@ package Chess;
 
 import Chess.Pieces.*;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class ChessBoard {
     private final Tile[][] board;
 
-    public ChessBoard() {
+    public ChessBoard(String gameVariant) {
         board = new Tile[8][8];
         initializeBoard();
-        fillBoard();
+        fillBoard(gameVariant);
     }
 
     public Tile[][] getBoardArray() {
@@ -60,12 +60,83 @@ public class ChessBoard {
     /*
     Initial filler of board
      */
-    private void fillBoard() {
-        //pawns
+    private void fillBoard(String gameVariant) {
+
+        //pawns are the same on both game variants
         for (int i = 0; i < 8; i++) {
             board[1][i].setPiece(new Pawn(PieceColor.BLACK));
             board[6][i].setPiece(new Pawn(PieceColor.WHITE));
         }
+
+        if (gameVariant.equals("Normal")) {
+            fillBoardNormalWay();
+        } else {
+            fillBoard960Way();
+        }
+
+    }
+
+    /*
+    Fill board randomly
+     */
+    private void fillBoard960Way() {
+
+        //BLACK LINE
+        List<ChessPiece> blackPieces = Arrays.asList(new Rook(PieceColor.BLACK), new Bishop(PieceColor.BLACK),
+                new Knight(PieceColor.BLACK), new Queen(PieceColor.BLACK),
+                new King(PieceColor.BLACK), new Knight(PieceColor.BLACK),
+                new Bishop(PieceColor.BLACK), new Rook(PieceColor.BLACK));
+
+        //WHITE LINE
+        List<ChessPiece> whitePieces = Arrays.asList(new Rook(PieceColor.WHITE), new Bishop(PieceColor.WHITE),
+                new Knight(PieceColor.WHITE), new Queen(PieceColor.WHITE),
+                new King(PieceColor.WHITE), new Knight(PieceColor.WHITE),
+                new Bishop(PieceColor.WHITE), new Rook(PieceColor.WHITE));
+
+        do {
+            Collections.shuffle(blackPieces);
+        } while (checkPositions(blackPieces.toString().replaceAll("[^\\p{Upper}]", "")));
+
+        System.out.println(blackPieces);
+
+        do {
+            Collections.shuffle(whitePieces);
+        } while (checkPositions(whitePieces.toString().replaceAll("[^\\p{Upper}]", "")));
+
+        System.out.println(whitePieces.toString());
+        for (int i = 0; i < 8; i++) {
+            System.out.println(whitePieces.get(i).toString());
+        }
+
+        for (int i = 0; i < 8; i++) {
+            board[0][i].setPiece(blackPieces.get(i));
+        }
+
+        for (int i = 0; i < 8; i++) {
+            board[7][i].setPiece(whitePieces.get(i));
+        }
+    }
+
+    private boolean checkPositions(String rank) {
+        //king between rooks
+        if (!rank.matches(".*R.*K.*R.*")) return true;
+
+        //all possible ways bishops can be placed
+        return !rank.matches(".*B(..|....|......|)B.*");
+    }
+
+    /*
+    Helper method to get a random position
+     */
+    private int getRandomPosition() {
+        Random random = new Random();
+        return random.nextInt(8);
+    }
+
+    /*
+    Fill board the classic way
+     */
+    private void fillBoardNormalWay() {
 
         //rooks
         board[0][0].setPiece(new Rook(PieceColor.BLACK));

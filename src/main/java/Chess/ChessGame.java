@@ -8,9 +8,10 @@ public class ChessGame {
     private boolean isFinished;
     private PieceColor currentPlayer;
 
-    public ChessGame() {
-        board = new ChessBoard();
+    public ChessGame(String gameVariant) {
+        board = new ChessBoard(gameVariant);
         currentPlayer = PieceColor.WHITE;
+        System.out.println("\n\n******************************\nCurrent Player: " + currentPlayer + "\n******************************");
         isFinished = false;
     }
 
@@ -51,6 +52,8 @@ public class ChessGame {
         currentPlayer = (currentPlayer == PieceColor.WHITE)
                 ? PieceColor.BLACK
                 : PieceColor.WHITE;
+
+        System.out.println("\n\n******************************\nCurrent Player: " + currentPlayer + "\n******************************");
     }
 
     // Function that checks if any piece can prevent check for the given color
